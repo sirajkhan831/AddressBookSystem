@@ -151,7 +151,7 @@ public class AddressBook {
 
     //modify method to modify selected contact
     public static void modify(LinkedList<Contact> contacts) {
-        System.out.println("Enter the name of contact to delete : ");
+        System.out.println("Enter the name of contact to modify : ");
         Scanner nameScan = new Scanner(System.in);
         String name = nameScan.nextLine().toLowerCase(Locale.ROOT);
         ListIterator<Contact> contactListIterator = contacts.listIterator();
