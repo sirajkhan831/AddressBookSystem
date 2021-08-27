@@ -97,4 +97,35 @@ public class AddressBook {
         }
         contactListIterator.add(contact);
     }
+
+    // addContact method to add a new contact by creating a new class and returning it through addContact();
+    public static Contact addContact() {
+        System.out.println("Enter a new first name (The first letter should be in uppercase): ");
+        Scanner firstNameScan = new Scanner(System.in);
+        String firstName = firstNameScan.nextLine();
+        System.out.println("Enter last name : ");
+        Scanner lastNameScan = new Scanner(System.in);
+        String lastName = lastNameScan.nextLine();
+        System.out.println("Enter contact number : ");
+        Scanner contactScan = new Scanner(System.in);
+        String contact = contactScan.nextLine();
+        System.out.println("Enter Email : ");
+        Scanner emailScan = new Scanner(System.in);
+        String email = emailScan.nextLine();
+        System.out.println("Enter city : ");
+        Scanner cityScan = new Scanner(System.in);
+        String city = cityScan.nextLine();
+        System.out.println("Enter State : ");
+        Scanner stateScan = new Scanner(System.in);
+        String state = stateScan.nextLine();
+        System.out.println("Enter Address : ");
+        Scanner addressScan = new Scanner(System.in);
+        String address = addressScan.nextLine();
+        System.out.println("Enter ZipCode : ");
+        Scanner zipScan = new Scanner(System.in);
+        int zipcode = zipScan.nextInt();
+
+        return new Contact(firstName, lastName, contact, address, city, state, email, zipcode);
+    }
+
 }
