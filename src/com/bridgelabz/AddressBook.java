@@ -159,7 +159,17 @@ public class AddressBook {
         while (contactListIterator.hasNext()) {
             if (Objects.equals(name, contactListIterator.next().getFirstName().toLowerCase(Locale.ROOT))) {
                 contactListIterator.remove();
-                addContact();
+                Contact newContact = addContact();
+                sort(contacts, newContact);
+                printList(contacts);
+                contactDetails(contacts);
+                System.out.println("Enter 99 to continue to the menu : ");
+                Scanner menuOptScan = new Scanner(System.in);
+                int menuOpt = menuOptScan.nextInt();
+                if (menuOpt == 99) {
+                    menu(contacts);
+                }
+
             }
         }
 
