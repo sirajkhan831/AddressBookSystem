@@ -39,10 +39,22 @@ public class AddressBook {
     // Menu method for user interaction
     public static void menu(LinkedList<Contact> contact) {
         System.out.println("Press 1 to view all your contacts.");
+        System.out.println("Press 2 to add a contact.");
         System.out.println("Press 9 to stop the program.");
         Scanner optionScan = new Scanner(System.in);
         int option = optionScan.nextInt();
         if (option == 1) {
+            printList(contact);
+            contactDetails(contact);
+            System.out.println("Enter 99 to continue to the menu : ");
+            Scanner menuOptScan = new Scanner(System.in);
+            int menuOpt = menuOptScan.nextInt();
+            if (menuOpt == 99) {
+                menu(contact);
+            }
+        } else if (option == 2) {
+            Contact newContact = addContact();
+            sort(contact, newContact);
             printList(contact);
             contactDetails(contact);
             System.out.println("Enter 99 to continue to the menu : ");
