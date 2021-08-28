@@ -1,8 +1,6 @@
 package com.bridgelabz;
 
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
 
@@ -40,6 +38,8 @@ public class AddressBook {
     public static void menu(LinkedList<Contact> contact) {
         System.out.println("Press 1 to view all your contacts.");
         System.out.println("Press 2 to add a contact.");
+        System.out.println("Press 3 to remove a contact.");
+        System.out.println("Press 4 to modify a contact.");
         System.out.println("Press 9 to stop the program.");
         Scanner optionScan = new Scanner(System.in);
         int option = optionScan.nextInt();
@@ -55,6 +55,27 @@ public class AddressBook {
         } else if (option == 2) {
             Contact newContact = addContact();
             sort(contact, newContact);
+            printList(contact);
+            contactDetails(contact);
+            System.out.println("Enter 99 to continue to the menu : ");
+            Scanner menuOptScan = new Scanner(System.in);
+            int menuOpt = menuOptScan.nextInt();
+            if (menuOpt == 99) {
+                menu(contact);
+            }
+        } else if (option == 3) {
+            printList(contact);
+            delete(contact);
+            printList(contact);
+            System.out.println("Operation Successful");
+            System.out.println("Enter 99 to continue to the menu : ");
+            Scanner menuOptScan = new Scanner(System.in);
+            int menuOpt = menuOptScan.nextInt();
+            if (menuOpt == 99) {
+                menu(contact);
+            }
+        } else if (option == 4) {
+            modify(contact);
             printList(contact);
             contactDetails(contact);
             System.out.println("Enter 99 to continue to the menu : ");
@@ -146,4 +167,37 @@ public class AddressBook {
         return new Contact(firstName, lastName, contact, address, city, state, email, zipcode);
     }
 
+    // delete method to delete selected contact by removing it from the linked list
+    public static void delete(LinkedList<Contact> contacts) {
+        System.out.println("Enter the name of contact to delete : ");
+        Scanner nameScan = new Scanner(System.in);
+        String name = nameScan.nextLine().toLowerCase(Locale.ROOT);
+        contacts.removeIf(contact -> Objects.equals(name, contact.getFirstName().toLowerCase(Locale.ROOT)));
+    }
+
+    //modify method to modify selected contact
+    public static void modify(LinkedList<Contact> contacts) {
+        printList(contacts);
+        System.out.println("Enter the name of contact to modify : ");
+        Scanner nameScan = new Scanner(System.in);
+        String name = nameScan.nextLine().toLowerCase(Locale.ROOT);
+        ListIterator<Contact> contactListIterator = contacts.listIterator();
+        while (contactListIterator.hasNext()) {
+            if (Objects.equals(name, contactListIterator.next().getFirstName().toLowerCase(Locale.ROOT))) {
+                contactListIterator.remove();
+                Contact newContact = addContact();
+                sort(contacts, newContact);
+                printList(contacts);
+                contactDetails(contacts);
+                System.out.println("Enter 99 to continue to the menu : ");
+                Scanner menuOptScan = new Scanner(System.in);
+                int menuOpt = menuOptScan.nextInt();
+                if (menuOpt == 99) {
+                    menu(contacts);
+                }
+
+            }
+        }
+
+    }
 }
