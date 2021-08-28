@@ -114,10 +114,16 @@ public class AddressBook {
     public static Contact addContact() {
         System.out.println("Enter a new first name (The first letter should be in uppercase): ");
         Scanner firstNameScan = new Scanner(System.in);
-        String firstName = firstNameScan.nextLine();
+        String firstNameTemp = firstNameScan.nextLine();
+        String firstLetter = firstNameTemp.substring(0,1).toUpperCase();
+        String remLetter = firstNameTemp.substring(1);
+        String firstName = firstLetter + remLetter;
         System.out.println("Enter last name : ");
         Scanner lastNameScan = new Scanner(System.in);
-        String lastName = lastNameScan.nextLine();
+        String lastNameTemp = lastNameScan.nextLine();
+        String firstLetterLastName = lastNameTemp.substring(0,1).toUpperCase();
+        String remLetterLastName = lastNameTemp.substring(1);
+        String lastName = firstLetterLastName + remLetterLastName;
         System.out.println("Enter contact number : ");
         Scanner contactScan = new Scanner(System.in);
         String contact = contactScan.nextLine();
