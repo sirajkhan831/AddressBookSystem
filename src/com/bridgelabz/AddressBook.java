@@ -36,17 +36,17 @@ public class AddressBook {
 
     // Menu method for user interaction
     public static void menu(LinkedList<Contact> contact) {
-        System.out.println("Press 1 to view all your contacts.");
-        System.out.println("Press 2 to add a contact.");
-        System.out.println("Press 3 to remove a contact.");
-        System.out.println("Press 4 to modify a contact.");
-        System.out.println("Press 9 to stop the program.");
+        System.out.println("Press 1 -> to view all your contacts.");
+        System.out.println("Press 2 -> to add a contact.");
+        System.out.println("Press 3 -> to remove a contact.");
+        System.out.println("Press 4 -> to modify a contact.");
+        System.out.println("Press 9 -> to stop the program.");
         Scanner optionScan = new Scanner(System.in);
         int option = optionScan.nextInt();
         if (option == 1) {
             printList(contact);
             contactDetails(contact);
-            System.out.println("Enter 99 to continue to the menu : ");
+            System.out.print("Enter 99 to continue to the menu : ");
             Scanner menuOptScan = new Scanner(System.in);
             int menuOpt = menuOptScan.nextInt();
             if (menuOpt == 99) {
@@ -57,7 +57,7 @@ public class AddressBook {
             sort(contact, newContact);
             printList(contact);
             contactDetails(contact);
-            System.out.println("Enter 99 to continue to the menu : ");
+            System.out.print("Enter 99 to continue to the menu : ");
             Scanner menuOptScan = new Scanner(System.in);
             int menuOpt = menuOptScan.nextInt();
             if (menuOpt == 99) {
@@ -67,8 +67,7 @@ public class AddressBook {
             printList(contact);
             delete(contact);
             printList(contact);
-            System.out.println("Operation Successful");
-            System.out.println("Enter 99 to continue to the menu : ");
+            System.out.print("Enter 99 to continue to the menu : ");
             Scanner menuOptScan = new Scanner(System.in);
             int menuOpt = menuOptScan.nextInt();
             if (menuOpt == 99) {
@@ -78,7 +77,7 @@ public class AddressBook {
             modify(contact);
             printList(contact);
             contactDetails(contact);
-            System.out.println("Enter 99 to continue to the menu : ");
+            System.out.print("Enter 99 to continue to the menu : ");
             Scanner menuOptScan = new Scanner(System.in);
             int menuOpt = menuOptScan.nextInt();
             if (menuOpt == 99) {
@@ -169,10 +168,14 @@ public class AddressBook {
 
     // delete method to delete selected contact by removing it from the linked list
     public static void delete(LinkedList<Contact> contacts) {
-        System.out.println("Enter the name of contact to delete : ");
+        System.out.print("Enter the NAME of contact to delete : ");
         Scanner nameScan = new Scanner(System.in);
-        String name = nameScan.nextLine().toLowerCase(Locale.ROOT);
-        contacts.removeIf(contact -> Objects.equals(name, contact.getFirstName().toLowerCase(Locale.ROOT)));
+        String name = nameScan.nextLine().toLowerCase();
+        if (name.length() < 3){
+            System.out.println("Invalid name");
+        }
+        else contacts.removeIf(contact -> Objects.equals(name, contact.getFirstName().toLowerCase()));
+        System.out.println(name.substring(0,1).toUpperCase()+name.substring(1).toLowerCase() +" has been deleted successfully");
     }
 
     //modify method to modify selected contact
@@ -180,10 +183,10 @@ public class AddressBook {
         printList(contacts);
         System.out.println("Enter the name of contact to modify : ");
         Scanner nameScan = new Scanner(System.in);
-        String name = nameScan.nextLine().toLowerCase(Locale.ROOT);
+        String name = nameScan.nextLine().toLowerCase();
         ListIterator<Contact> contactListIterator = contacts.listIterator();
         while (contactListIterator.hasNext()) {
-            if (Objects.equals(name, contactListIterator.next().getFirstName().toLowerCase(Locale.ROOT))) {
+            if (Objects.equals(name, contactListIterator.next().getFirstName().toLowerCase())) {
                 contactListIterator.remove();
                 Contact newContact = addContact();
                 sort(contacts, newContact);
@@ -198,6 +201,5 @@ public class AddressBook {
 
             }
         }
-
     }
 }
